@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html manifest="cache.manifest">
+    <head>
+        <title>Exempelapplikation</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- The webapplication runs in full-screen in iOS device. -->
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+
+        <link rel="stylesheet" href="css/jquery.mobile-1.0.1.min.css" />
+        <link rel="stylesheet" href="css/style.css" />
+        <!-- Icons that appear on the home screen if you chose to save. 
+             Works on both android and ios. -->
+        <link rel="apple-touch-icon" href="images/icon57x57.png" />
+        <link rel="apple-touch-icon" sizes="72x72" href="images/icon72x72.png" />
+        <link rel="apple-touch-icon" sizes="114x114" href="images/icon114x114.png" />
+
+        <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+        <script src="js/modernizr-2.5.3.min.js"></script>
+        <script src="js/jquery-1.7.1.min.js"></script>
+        <script src="js/app.init.js"></script>
+        <script src="js/jquery.mobile-1.0.1.min.js"></script>
+        <script src="js/app.offline.js"></script>
+        <script src="js/function.help.js"></script>
+        <script src="js/app.database.js"></script>
+        <script src="js/app.swipe.js"></script>
+        <script src="js/app.draw.js"></script>
+        <script src="js/app.map.js"></script>
+        <script src="js/app.twitter.js"></script>
+    </head>
+    <body>
+        <!-- Page one, Draw a image ------------------------------------------->
+        <div data-role="page" id="page1" data-fullscreen="true">
+            <div id="header">
+                <header data-role="header" data-theme="b">
+                    <fieldset data-role="controlgroup" data-type="horizontal" class="ui-btn-right" style="top: 0px;">
+                        <a href="#page1" data-role="button" class="ui-btn-active">Bild</a>
+                        <a href="#page4" data-role="button" class="online">karta</a>
+                        <a href="#page5" data-role="button" class="online">Twitter</a>
+                    </fieldset>
+                    <h1>Rita en bild</h1>
+                    <nav data-role="navbar">
+                        <ul>
+                            <li><a href="#page1" class="ui-btn-active ui-state-persist">Skapa bild</a></li>
+                            <li><a href="#page2" id="loadData">Hämta sparad bild</a></li>
+                        </ul>
+                    </nav>
+                </header>
+            </div>
+            <div id="imagesDiv" style="width: 100%; height: 100%;">
+                <div id="rightPanel">
+                    <div id="colorMenu">
+                        <div style="background-color:#000000;"></div>
+                        <div style="background-color:#808080;"></div>
+                        <div style="background-color:#C0C0C0;"></div>
+                        <div style="background-color:#ffffff;"></div>
+
+                        <div style="background-color:#0000A0;"></div>
+                        <div style="background-color:#0000FF;"></div>
+                        <div style="background-color:#ADD8E6;"></div>
+                        <div style="background-color:#00FFFF;"></div>
+
+                        <div style="background-color:#800080;"></div>
+                        <div style="background-color:#A52A2A;"></div>
+                        <div style="background-color:#800000;"></div>
+                        <div style="background-color:#FF00FF;"></div>
+
+                        <div style="background-color:#FF0000;"></div>
+                        <div style="background-color:#FFA500;"></div>
+                        <div style="background-color:#FFFF00;"></div>
+                        <div style="background-color:#ECD872;"></div>
+
+                        <div style="background-color:#008000;"></div>
+                        <div style="background-color:#808000;"></div>
+                        <div style="background-color:#348017;"></div>
+                        <div style="background-color:#00FF00;"></div>		
+                    </div><br/>
+                    Färg:<br/>
+                    <input type="color" value="#000000" id="selectedColor" style="width: 180px;"/>
+                    Pen storlek:<br/> 
+                    <input type="range" min="1" max="50" value="10" id="brushSize" style="width: 40px; margin: 0px; padding: 0px;"/>
+                    <br/><br/>
+                    <a href="#" id="clear" data-role="button" data-theme="b">Rensa</a>
+                    <a href="#page3" id="save" data-role="button" data-theme="b" data-rel="dialog">Spara</a><br/>
+                </div>
+                <canvas id="canvas" style="z-index: 110;"></canvas>
+            </div>
+        </div>
+
+        <!--page 2, load a saved image ---------------------------------------->
+        <div data-role="page" id="page2">
+            <header data-role="header" data-theme="b">
+                <fieldset data-role="controlgroup" data-type="horizontal" class="ui-btn-right" style="top: 0px;">
+                    <a href="#page1" data-role="button" class="ui-btn-active">Bild</a>
+                    <a href="#page4" data-role="button">karta</a>
+                    <a href="#page5" data-role="button">Twitter</a>
+                </fieldset>
+                <h1>Hämta sparad bild</h1>
+                <nav data-role="navbar">
+                    <ul>
+                        <li><a href="#page1">Skapa bild</a></li>
+                        <li><a href="#page2" class="ui-btn-active ui-state-persist">Hämta sparad bild</a></li>
+                    </ul>
+                </nav>
+            </header>
+            <div class="content-primary" id="content">
+                <ul data-role="listview" id="images"></ul>
+            </div>	
+        </div>
+        <!-- Page 3, (Dialog) --------------------------------------------------->
+        <div data-role="page" id="page3">
+            <header data-role="header" data-theme="a">
+                <h1>Sparad</h1>
+            </header>
+            <div data-role="content">
+                <p>Bilden är nu sparad.</p>
+            </div>
+        </div>
+        <!--page 4, Show your position on map ------------------------------------>
+        <div data-role="page" id="page4">
+            <header data-role="header" data-theme="b">
+                <fieldset data-role="controlgroup" data-type="horizontal" class="ui-btn-right" style="top: 0px;">
+                    <a href="#page1" data-role="button">Bild</a>
+                    <a href="#page4" data-role="button" class="ui-btn-active">karta</a>
+                    <a href="#page5" data-role="button">Twitter</a>
+                </fieldset>
+                <h1>Tracka din rutt</h1>
+            </header>
+            <div id="mapsDiv" style="width: 100%; height: 100%;">
+                <div id="topMapRow">
+                    <a href="#" data-role="button" data-icon="gear" id="myPosition" style="float: left;">Min position</a>
+                    <a href="#" data-role="button" data-icon="arrow-l" id="startTrack" style="float: right;" class="hidden">Starta tracking</a>
+                    <a href="#" data-role="button" data-icon="delete" id="stopTrack" style="float: right;" class="hidden">Stoppa tracking</a>
+                    <!-- TODO: Fix so the map is under the button too. -->
+                </div>
+                <div id="maps"></div>
+            </div>
+        </div>
+        <!--page 5, Read Tweeter feeds  --------------------------------------->
+        <div data-role="page" id="page5">
+            <header data-role="header" data-theme="b">
+                <fieldset data-role="controlgroup" data-type="horizontal" class="ui-btn-right" style="top: 0px;">
+                    <a href="#page1" data-role="button">Bild</a>
+                    <a href="#page4" data-role="button">Karta</a>
+                    <a href="#page5" data-role="button" class="ui-btn-active">Twitter</a>
+                </fieldset>
+                <h1>Läs twitter</h1>
+            </header>	
+            <div class="content" id="content">
+                <fieldset data-role="fieldcontain" data-type="horizontal" style="margin: 0px;">
+                    <input type="search" name="twitterUser" id="twitterUser" value="" />
+                    <a data-inline="true" data-role="button" href="#" id="tweetButton">Hämta Tweets</a>
+                </fieldset>
+                <div class="content-primary">	
+                    <ul data-role="listview" data-inset="true" id="tweets"></ul>
+                </div>	
+            </div>	
+        </div>
+    </body>
+</html>

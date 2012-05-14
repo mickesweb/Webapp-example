@@ -1,0 +1,59 @@
+/* -- RESET ALL ------------------------------------------------------------- */
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote,
+pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd,
+q, s, samp, small, strike, strong, sub, sup, tt, var, dl, dt, dd, ol, ul, li, fieldset, form,
+label, legend, table, caption, tbody, tfoot, thead, tr, th, td {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-weight: inherit;
+    font-style: inherit;
+    font-size: 100%;
+    font-family: inherit;
+    background: transparent;
+}
+/* -------------------------------------------------------------------------- */
+.hidden {
+    display: none;
+}
+
+.clear {
+    clear: both;
+}
+/* -- Draw page ------------------------------------------------------------- */
+canvas {
+    cursor: crosshair;
+    border: black solid 1px;
+    background-color: #ffffff;
+}
+
+#rightPanel {
+    position: absolute;
+    background: #C0C0C0;
+    border-left: 1px #000000 solid;
+    border-bottom: 1px #000000 solid;
+    right: 0px;
+    width: 200px;
+    z-index: 100;
+}
+
+#topMapRow {
+    position: absolute;
+    left: 0px;
+    width: 100%;
+    z-index: 100;
+}
+
+#colorMenu {
+    width: 200px;
+    float: right;
+}
+
+#colorMenu div {
+    cursor: pointer;
+    cursor: hand;
+    width: 50px;
+    height: 50px;
+    float: left;
+}

@@ -1,0 +1,26 @@
+CACHE MANIFEST
+ 
+# version: 1
+
+CACHE:
+index.html
+css/jquery.mobile-1.0.1.min.css
+css/jquery.mobile.structure-1.0.1.min.css
+css/style.css
+css/images/ajax-loader.png
+css/images/icons-18-black.png
+css/images/icons-18-white.png
+css/images/icons-36-black.png
+css/images/icons-36-white.png
+images/icon114x114.png
+images/icon57x57.png
+images/icon72x72.png
+js/jquery-1.7.1.min.js
+js/jquery.mobile-1.0.1.min.js
+js/app.offline.js
+js/app.init.js
+js/app.database.js
+js/function.help.js
+js/app.draw.js
+js/app.swipe.js
+
